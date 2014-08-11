@@ -132,6 +132,22 @@ $(document).ready(function() {
             $(".card.price.usd > input").keyup(function() {
                 btc.showUSD($(this).val());
             });
+            $(".card.price-top > input").keyup(this.sizeTop);
+            $(".card.price-bot > input").keyup(this.sizeBot);
+        },
+        sizeTop: function() { // bound to input
+            var sw = $(document).width();
+            var snapStart = 68; // width needed for 1 place
+            var snapInt = 51; // width needed for each additional place
+            var p = parseInt((sw - snapStart) / snapInt); // number of places to show
+            var l = (""+parseFloat($(this).val())).length; // number of places
+            var s = 80 * p/l;
+            if(s > 80) s = 80;
+            console.debug(p, l, s);
+            $(this).css("font-size", s+"px");
+        },
+        sizeBot: function() { // bound to input
+
         },
         placeval: function(val, pv) {
             return (parseInt(val * Math.pow(10,pv)) / Math.pow(10,pv)).toLocaleString();
