@@ -160,7 +160,7 @@ $(document).ready(function() {
         sizeBot: function() { // bound to input
             var sw = $(document).width();
             var snapStart = 26; // width needed for 1 place
-            var snapInt = 16; // width needed for each additional place
+            var snapInt = 18; // width needed for each additional place
             var p = parseInt((sw - snapStart) / snapInt); // number of places to show
             var l = (""+parseFloat($(this).val().replace(/,/g,'').replace('.',''))).length; // number of places
             var s = 26 * p/l;
