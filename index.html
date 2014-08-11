@@ -93,6 +93,45 @@ www.wogloms.com / j@wogloms.net
     padding-left: 28px;
     width: calc(100% - 26px);
 }
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotating {
+  from {
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+.rotating {
+  -webkit-animation: rotating 1s linear infinite;
+  -moz-animation: rotating 1s linear infinite;
+  -ms-animation: rotating 1s linear infinite;
+  -o-animation: rotating 1s linear infinite;
+  animation: rotating 1s linear infinite;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -107,8 +146,21 @@ $(document).ready(function() {
             'coinbase': 'Coinbase'
         },
         curPv: 'bitstamp',
+        timer: null,
         init: function() {
             this.initfetch();
+            $(".refresh").click(function() {
+                btc.checkfetch();
+                clearInterval(btc.timer);
+                btc.startTimer();
+            });
+            this.startTimer();
+        },
+        startTimer: function() {
+            this.timer = setInterval(function() {
+                console.debug("Timer: checking");
+                btc.checkfetch();
+            }, 15000);
         },
         callback: function() {
             this.fill();
@@ -167,7 +219,7 @@ $(document).ready(function() {
             var l = (""+parseFloat($(this).val().replace(/,/g,'').replace('.',''))).length; // number of places
             var s = 80 * p/l;
             if(s > 80) s = 80;
-            console.debug(p, l, s);
+            // console.debug(p, l, s);
             $(this).css("font-size", s+"px");
         },
         sizeBot: function() { // bound to input
@@ -178,7 +230,7 @@ $(document).ready(function() {
             var l = (""+parseFloat($(this).val().replace(/,/g,'').replace('.',''))).length; // number of places
             var s = 26 * p/l;
             if(s > 26) s = 26;
-            console.debug(p, l, s);
+            // console.debug(p, l, s);
             $(this).css("font-size", s+"px");
         },
         placeval: function(val, pv) {
@@ -189,7 +241,7 @@ $(document).ready(function() {
             var conv = this.prices[this.curPv];
             var r = amo * conv;
             if(r == NaN || !(r<0 || r>=0)) return;
-            console.info(btcs+"BTC = "+r+"USD");
+            // console.info(btcs+"BTC = "+r+"USD");
             $(".card.price.usd > input").val(this.placeval(r, 2));
             $(".card.price.usd > input").attr("data-val", r);
         },
@@ -198,7 +250,7 @@ $(document).ready(function() {
             var conv = this.prices[this.curPv];
             var r = amo * (1 / conv);
             if(r == NaN || !(r<0 || r>=0)) return;
-            console.info(usds+"USD = "+r+"BTC");
+            // console.info(usds+"USD = "+r+"BTC");
             $(".card.price.btc > input").val(this.placeval(r, 6));
             $(".card.price.btc > input").attr("data-val", r);
         },
@@ -214,10 +266,12 @@ $(document).ready(function() {
         },
         fetchamount: function(cb) {
             var _st = +new Date;
+            $(".refresh").addClass("rotating");
             $.get("blob.php", {}, function(d) {
                 btc.data = JSON.parse(d);
                 console.log(btc.data);
                 cb();
+                $(".refresh").removeClass("rotating");
             }, "text");
         },
         getconv: function(pv) {
@@ -237,6 +291,7 @@ $(document).ready(function() {
             B
         </div>
         <div class="title">Bitcoin</div>
+        <div class="refresh"></div>
     </div>
 
     <div class="contents">
