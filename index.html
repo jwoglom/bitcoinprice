@@ -84,19 +84,86 @@ www.wogloms.com / j@wogloms.net
     content: "BTC";
 }
 
+.card.pvs {
+    height: 33px;
+}
+
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
     btc = {
         data: {},
+        prices: {},
+        pvs: {
+            'bitstamp': 'Bitstamp',
+            'bitfinex': 'Bitfinex',
+            'btce': 'BTC-e',
+            'itbit': 'itBit',
+            'coinbase': 'Coinbase'
+        },
+        curPv: 'bitstamp',
         init: function() {
             this.fetchamount();
         },
+        callback: function() {
+            this.fill();
+            this.add();
+            this.triggers();
+            $(".card.price.btc > input").val("1.00");
+            this.showBTC(1.00);
+        },
+        fill: function() {
+            $p = $(".card.pvs");
+            for(var i in this.pvs) {
+                this.prices[i] = this.getconv(i);
+                $p.append("<div class='bottom-button pv "+i+"'>"+this.pvs[i]+"</div>");
+                $p.css("height", parseInt($p.css("height")) + 40);
+            }
+            console.log(this.prices);
+        },
+        add: function() {
+            $(".card.price-top").addClass("usd").attr("data-currency", "usd");
+            $(".card.price-bot").addClass("btc").attr("data-currency", "btc");
+        },
+        triggers: function() {
+            $(".card.price.btc > input").keyup(function() {
+                btc.showBTC($(this).val());
+            });
+            $(".card.price.usd > input").keyup(function() {
+                btc.showUSD($(this).val());
+            });
+        },
+        placeval: function(val, pv) {
+            return (parseInt(val * Math.pow(10,pv)) / Math.pow(10,pv)).toLocaleString();
+        },
+        showBTC: function(btcs) {
+            var amo = parseFloat(btcs);
+            var conv = this.prices[this.curPv];
+            var r = amo * conv;
+            if(r == NaN || !(r<0 || r>=0)) return;
+            console.info(btcs+"BTC = "+r+"USD");
+            $(".card.price.usd > input").val(this.placeval(r, 2));
+        },
+        showUSD: function(usds) {
+            var amo = parseFloat(usds);
+            var conv = this.prices[this.curPv];
+            var r = amo * (1 / conv);
+            if(r == NaN || !(r<0 || r>=0)) return;
+            console.info(usds+"USD = "+r+"BTC");
+            $(".card.price.btc > input").val(this.placeval(r, 6));
+        },
         fetchamount: function() {
+            var _st = +new Date;
             $.get("blob.php", {}, function(d) {
                 btc.data = JSON.parse(d);
+                btc.prices = btc.data.prices;
                 console.log(btc.data);
+                btc.callback.bind(btc)();
+                console.log("Done "+(+new Date - _st));
             }, "text");
+        },
+        getconv: function(pv) {
+            return parseFloat(this.data.prices[pv].last);
         }
     };
 
@@ -112,47 +179,17 @@ $(document).ready(function() {
     </div>
 
     <div class="contents">
-        <div class="card price price-top usd" data-currency="USD">
-            <input class="top-input" value="590.01" />
+        <div class="card price price-top">
+            <input class="top-input" value="000.00" />
             <div class="currency-label"></div>
         </div>
-        <div class="card price price-bot btc" data-currency="BTC">
-            <input class="bot-input" value="1" />
+        <div class="card price price-bot">
+            <input class="bot-input" value="0.00" />
             <div class="currency-label"></div>
         </div>
 
-        <div class="card lines">
-            <div class="title">View Lines:</div>
-            <div class="half-bottom-button">
-                <div class="bottom-button rd left">
-                    Red
-                </div>
-                <div class="bottom-button gr right">
-                    Green
-                </div>
-            </div>
-            <div class="half-bottom-button">
-                <div class="bottom-button bl left">
-                    Blue
-                </div>
-                <div class="bottom-button yl right">
-                    Yellow
-                </div>
-            </div>
-            <div class="half-bottom-button">
-                <div class="bottom-button or left">
-                    Orange
-                </div>
-                <div class="bottom-button sv right">
-                    Silver
-                </div>
-            </div>
-        </div>
-
-        <div class="card stations">
-            <div class="bottom-button">
-                View Stations
-            </div>
+        <div class="card pvs">
+            <div class="title">Provider:</div>
         </div>
     </div>
 </div>
