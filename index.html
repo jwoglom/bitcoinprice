@@ -77,38 +77,32 @@ www.wogloms.com / j@wogloms.net
 .card.price.usd > .currency-label {
     right: -1px;
 }
-.card.price-top .currency-glyph {
-    position: absolute;
-    top: 0px;
-    left: 10px;
-    font-size: 40px;
-    transform: rotate(10deg);
-    background-size: 32px 32px;
-}
-.card.price-bot .currency-glyph {
-    position: absolute;
-    top: 0px;
-    left: 10px;
-    font-size: 20px;
-    transform: rotate(10deg);
-    background-size: 24px 32px;
-    width: 31px; height: 41px;
-}
 .card.price.usd > .currency-label:before {
     content: "USD";
 }
 .card.price.btc > .currency-label:before {
     content: "BTC";
 }
-.card.price.usd > .currency-glyph:before {
-    content: "$";
-}
-.card.price.btc > .currency-glyph {
-    content: "B";
-    background-image: url(glyph-black.png);
-    background-repeat: no-repeat;
-}
+
 </style>
+<script type="text/javascript">
+$(document).ready(function() {
+    btc = {
+        data: {},
+        init: function() {
+            this.fetchamount();
+        },
+        fetchamount: function() {
+            $.get("blob.php", {}, function(d) {
+                btc.data = JSON.parse(d);
+                console.log(btc.data);
+            }, "text");
+        }
+    };
+
+    btc.init();
+});
+</script>
 <div class="container">
     <div class="header">
         <div class="logo">
@@ -121,12 +115,10 @@ www.wogloms.com / j@wogloms.net
         <div class="card price price-top usd" data-currency="USD">
             <input class="top-input" value="590.01" />
             <div class="currency-label"></div>
-            <div class="currency-glyph"></div>
         </div>
         <div class="card price price-bot btc" data-currency="BTC">
             <input class="bot-input" value="1" />
             <div class="currency-label"></div>
-            <div class="currency-glyph"></div>
         </div>
 
         <div class="card lines">
