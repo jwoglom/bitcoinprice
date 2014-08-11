@@ -1,0 +1,39 @@
+.contents .card {
+    margin: 8px 8px 16px 8px;
+    outline: 1px solid white;
+    background: rgb(251, 249, 253);
+    height: 200px;
+    width: calc(100% - 16px);
+    box-shadow: rgba(0, 0, 0, 0.0470588) 0px 8px 11px 3px;
+}
+.contents .card .title {
+    font-size: 20px;
+    /* font-color: rgb(117, 117, 117); */
+    font-weight: 100;
+    padding: 3px 8px;
+}
+.contents .card .bottom-button {
+    width: 100%;
+    width: calc(100% - 18px);
+    height: 40px;
+    display: block;
+    position: relative;
+    font-weight: 100;
+    font-size: 18px;
+    line-height: 40px;
+    padding-left: 20px;
+    left: -1px;
+}
+.contents .card .bottom-button:hover {
+    cursor: pointer;
+    transition: all 0.4s ease;
+    -webkit-transform: translateZ(0); /* force GPU on mobile devices */
+    padding-left: 28px; /* +8px */
+    width: calc(100% - 26px);
+    background-color: rgba(66, 133, 244, 0.3);
+}
+
+.contents .card:last-child {
+    /* bug fix to allow scrolling; accounts for header */
+    margin-bottom: 50px;
+}

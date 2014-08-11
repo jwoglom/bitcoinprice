@@ -1,0 +1,220 @@
+/*
+colorPrimary: rgb(66, 133, 244);
+colorPrimaryDark: rgb(51, 103, 214);
+textColorPrimary: rgb(237, 243, 254);
+windowBackground: rgb(48, 48, 48);
+OR: rgb(221, 134, 2);
+SV: rgb(160, 162, 160);
+BL: rgb(9, 147, 213);
+YL: rgb(246, 211, 22);
+RD: rgb(191, 18, 55);
+GR: rgb(0, 175, 81);
+*/
+* {
+  //  outline: none !important;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    /*max-height: 640px;
+    max-width: 360px;*/
+    outline: 1px solid black;
+    overflow: hidden;
+    background-color: rgb(228, 228, 228);
+}
+.header {
+    width: 100%;
+    height: 40px;
+    outline: 1px solid black;
+    background-color: rgb(66, 133, 244);
+    border-bottom: 1px solid rgb(55, 82, 126);
+    color: white;
+}
+.header .logo {
+    display: table-cell;
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    font-size: 42px;
+    font-weight: 700;
+    padding: 0 10px;
+    line-height: 0;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    z-index: 2;
+}
+.header .logo.back {
+    cursor: pointer;
+}
+.header .logo.back:hover {
+    transition: all 0.4s ease;
+    -webkit-transform: translateZ(0); /* force GPU on mobile devices */
+    border-left: 22px solid rgb(66,133,244);
+    padding-left: 0;
+}
+.header .logo.back:before {
+    content: "\276e"; /* ❮ */
+    display: inline;
+    position: relative;
+    left: -8px;
+    top: -7px;
+    font-size: 20px;
+    font-weight: 100;
+}
+.header .logo.back:hover:before {
+    transition: all 0.4s ease;
+    -webkit-transform: translateZ(0); /* force GPU on mobile devices */
+    font-size: 42px;
+    margin-left: -14px;
+    top: 0;
+}
+.header .title {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 24px;
+    white-space: nowrap;
+}
+.header .search {
+    position: absolute;
+    top: 0;
+    right: -185px; /* 20px without bar */
+    width: 220px;
+    height: 40px;
+    cursor: pointer;
+    background: inherit; /* Go over text */
+}
+.header .search-icon {
+    display: inline-block;
+    /* transform: rotate(-45deg);
+    font-size: 30px; */
+    background-image: url(search.png);
+    background-size: 25px 25px;
+    background-position: center center;
+    height: 40px;
+    width: 30px;
+    background-repeat: no-repeat;
+}
+.header .search:hover, .header .search.open {
+    transition: all 0.4s ease;
+    -webkit-transform: translateZ(0); /* force GPU on mobile devices */
+    right: 0px;
+}
+.header .search input {
+    display: inline-block;
+    width: 180px;
+    height: 30px;
+    position: relative;
+    top: -15px;
+    border: 2px solid rgb(51, 103, 214);
+    z-index: 99;
+}
+.header .refresh {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+    background-image: url(refresh.png);
+}
+.header .refresh-time {
+    position: absolute;
+    top: 4px;
+    right: 42px;
+    height: 32px;
+    width: auto;
+    font-size: 16px;
+    line-height: 32px;
+}
+.container .multibackground {
+    position: fixed;
+}
+.contents {
+    display: block;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100%;
+    min-height: calc(100% - 40px);
+    background-color: rgb(228, 228, 228);
+    border-top: 1px solid rgb(47, 45, 43);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.loading {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-color: white;
+    background-image: url(load.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    z-index: 99;
+}
+
+@media (min-width: 800px) {
+    div.contents {
+        /* min-width: 100%; */
+        max-width: 1200px;
+        /* max-width: none;
+        width: 100%;
+        -webkit-column-count: 2;
+        -webkit-column-gap: 10px;
+        -webkit-column-fill: auto;
+        -moz-column-count: 2;
+        -moz-column-gap: 10px;
+        -moz-column-fill: auto;
+        column-count: 2;
+        column-gap: 15px;
+        column-fill: auto; */
+    }
+    div.contents > div.card {
+        width: calc(50% - 20px);
+        float: left;
+        /* display: inline-block;
+        -webkit-column-break-inside: avoid;
+        -moz-column-break-inside: avoid;
+        column-break-inside: avoid; */
+    }
+    @media (min-height: 600px) {
+        div.contents > .ordercards {
+            width: 100%;
+            position: fixed;
+            /* bottom: 0; */
+            max-width: 600px;
+            left: 50%;
+            margin-left: -300px;
+            bottom: auto;
+            top: calc(100% - 144px);
+        }
+        div.contents > .ordercards.one-line {
+            top: calc(100% - 72px);
+        }
+    }
+     @media (max-height: 600px) {
+        div.contents > .ordercards {
+            position: static;
+            display: inline-block;
+            margin-left: calc(50% - 300px);
+            left: initial;
+            top: initial;
+            width: 100%;
+            max-width: 600px;
+        }
+    }
+    div.contents > .ordercards.more-lines {
+        position: static;
+        display: inline-block;
+        margin-left: calc(50% - 300px);
+        left: initial;
+        top: initial;
+    }
+}

@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<!--
+StationStatus
+=============
+A web-based and mobile-optimized application for viewing the status of the Washington DC Metro system.
+
+James Woglom
+www.wogloms.com / j@wogloms.net
+-->
+    <title>Bitcoin status</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=1">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300' rel='stylesheet' type='text/css'>
+    
+    <link rel="stylesheet" type="text/css" href="ui.core.css" />
+    <link rel="stylesheet" type="text/css" href="ui.card.css" />
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+
+
+    </script>
+</head>
+<body>
+<style type="text/css">
+.card.price-top {
+    height: 96px;
+    position: relative;
+}
+.card.price-top .top-input {
+    font-size: 80px;
+    margin: 0;
+    border: 0;
+    background: 0;
+    text-align: center;
+    width: 100%;
+    width: calc(100% - 2px);
+}
+.card.price-top .currency-label {
+    position: absolute;
+    top: 78px;
+    right: 2px;
+    font-size: 16px;
+    line-height: 16px;
+}
+.card.price-bot {
+    height: 32px;
+    margin-top: -14px;
+    position: relative;
+}
+.card.price-bot .bot-input {
+    font-size: 26px;
+    margin: 0;
+    border: 0;
+    background: 0;
+    text-align: center;
+    width: 100%;
+    width: calc(100% - 2px);
+}
+
+.card.price-bot .currency-label {
+    position: absolute;
+    top: 14px;
+    right: 2px;
+    font-size: 16px;
+    line-height: 16px;
+}
+</style>
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            B
+        </div>
+        <div class="title">Bitcoin</div>
+    </div>
+
+    <div class="contents">
+        <div class="card price price-top" data-currency="USD">
+            <input class="top-input" value="590.01" />
+            <div class="currency-label">USD</div>
+        </div>
+        <div class="card price price-bot" data-currency="BTC">
+            <input class="bot-input" value="1" />
+            <div class="currency-label">BTC</div>
+        </div>
+
+        <div class="card lines">
+            <div class="title">View Lines:</div>
+            <div class="half-bottom-button">
+                <div class="bottom-button rd left">
+                    Red
+                </div>
+                <div class="bottom-button gr right">
+                    Green
+                </div>
+            </div>
+            <div class="half-bottom-button">
+                <div class="bottom-button bl left">
+                    Blue
+                </div>
+                <div class="bottom-button yl right">
+                    Yellow
+                </div>
+            </div>
+            <div class="half-bottom-button">
+                <div class="bottom-button or left">
+                    Orange
+                </div>
+                <div class="bottom-button sv right">
+                    Silver
+                </div>
+            </div>
+        </div>
+
+        <div class="card stations">
+            <div class="bottom-button">
+                View Stations
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
