@@ -1,0 +1,117 @@
+.header .logo {
+    background-image: url(logo-orange.png);
+    background-size: 32px 32px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    line-height: 0px;
+    text-indent: -999px;
+}
+
+.header.orange {
+    background-color: #f7931a;
+    border-color: #f7931a;
+    color: black;
+}
+.header.orange .logo {
+    background-image: url(logo-black.png);
+}
+.card.price-top {
+    height: 96px;
+    position: relative;
+}
+.card.price-top .top-input {
+    font-size: 80px;
+    margin: 0;
+    border: 0;
+    background: 0;
+    text-align: center;
+    width: 100%;
+    width: calc(100% - 2px);
+    height: 94px; /* 96px total */
+}
+.card.price-top .currency-label {
+    position: absolute;
+    top: 78px;
+    right: 2px;
+    font-size: 16px;
+    line-height: 16px;
+}
+.card.price-bot {
+    height: 32px;
+    margin-top: -14px;
+    position: relative;
+}
+.card.price-bot .bot-input {
+    font-size: 26px;
+    margin: 0;
+    border: 0;
+    background: 0;
+    text-align: center;
+    width: 100%;
+    width: calc(100% - 2px);
+}
+
+.card.price-bot .currency-label {
+    position: absolute;
+    top: 14px;
+    right: 2px;
+    font-size: 16px;
+    line-height: 16px;
+}
+.card.price.usd > .currency-label {
+    right: -1px;
+}
+.card.price.usd > .currency-label:before {
+    content: "USD";
+}
+.card.price.btc > .currency-label:before {
+    content: "BTC";
+}
+
+.card.pvs {
+    height: 33px;
+}
+.card.pvs .pv.cur {
+    background-color: rgba(66, 133, 244, 0.3);
+    padding-left: 28px;
+    width: calc(100% - 26px);
+}
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotating {
+  from {
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+.rotating {
+  -webkit-animation: rotating 1s linear infinite;
+  -moz-animation: rotating 1s linear infinite;
+  -ms-animation: rotating 1s linear infinite;
+  -o-animation: rotating 1s linear infinite;
+  animation: rotating 1s linear infinite;
+}
