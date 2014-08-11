@@ -2,7 +2,7 @@
 ini_set('user_agent', 'MSIE 6.0');
 $now = time();
 $st = round(microtime(true) * 1000);
-$maxage = 60;
+$maxage = 30;
 if(file_exists("blob-latest.txt")) {
     list($timestamp, $latest) = explode("\n", file_get_contents("blob-latest.txt"), 2);
     $diff = ($now - $timestamp);
