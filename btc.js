@@ -4,8 +4,8 @@ btc = {
     pvs: {
         'bitstamp': 'Bitstamp',
         'bitfinex': 'Bitfinex',
-        'btce': 'BTC-e',
-        'itbit': 'itBit',
+        //'btce': 'BTC-e',
+        //'itbit': 'itBit',
         'coinbase': 'Coinbase'
     },
     curPv: 'bitstamp',
@@ -47,7 +47,7 @@ btc = {
         var pv = $(this).attr("data-pv");
         btc.curPv = pv;
         $(".pv").removeClass("cur");
-        $(".pv."+this.curPv).addClass("cur");
+        $(".pv."+btc.curPv).addClass("cur");
         btc.regen();
     },
     add: function() {
@@ -138,7 +138,8 @@ btc = {
         }, "text");
     },
     getconv: function(pv) {
-        return parseFloat(this.data.prices[pv].last);
+        if (this.data.prices[pv])
+            return parseFloat(this.data.prices[pv].last);
     },
     regen: function() {
         $(".card.price.btc > input").keyup();

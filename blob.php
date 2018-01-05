@@ -22,11 +22,11 @@ $data["prices"]["bitstamp"] = f("https://www.bitstamp.net/api/ticker/");
 $data["prices"]["bitfinex"] = f("https://api.bitfinex.com/v1/ticker/btcusd/");
 $data["prices"]["bitfinex"]->last = $data["prices"]["bitfinex"]->last_price;
 
-$data["prices"]["btce"] = f("https://btc-e.com/api/2/btc_usd/ticker");
-$data["prices"]["btce"] = $data["prices"]["btce"]->ticker;
+//$data["prices"]["btce"] = f("https://btc-e.com/api/2/btc_usd/ticker");
+//$data["prices"]["btce"] = $data["prices"]["btce"]->ticker;
 
-$data["prices"]["itbit"] = f("https://www.itbit.com/api/feeds/ticker/XBTUSD");
-$data["prices"]["itbit"]->last = $data["prices"]["itbit"]->close;
+//$data["prices"]["itbit"] = f("https://www.itbit.com/api/feeds/ticker/XBTUSD");
+//$data["prices"]["itbit"]->last = $data["prices"]["itbit"]->close;
 
 $coinbase = array();
 $coinbase["buy"] = f("https://coinbase.com/api/v1/prices/buy");
